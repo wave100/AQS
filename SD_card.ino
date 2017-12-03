@@ -24,7 +24,7 @@
 #include <SD.h>
 
 const int chipSelect = 4;
-
+int Time = 0;
 int getSensor(int a) {
   if (a == 0) {
     return 0;
@@ -61,11 +61,17 @@ void setup() {
 
 void loop() {
   // make a string for assembling the data to log:
+  delay(2000);
+  Time += 2;
   String dataString = "";
-
+  dataString+=String(Time);
+  //int sensor = analogRead(0);
+  //dataString += sensor;
+  
   // read three sensors and append to the string:
   for (int analogPin = 0; analogPin < 3; analogPin++) {
-    int sensor = getSensor(analogPin);
+    int sensor = analogRead(analogPin);
+    //int sensor = getSensor(analogPin);
     dataString += String(sensor);
     if (analogPin < 2) {
       dataString += ",";
